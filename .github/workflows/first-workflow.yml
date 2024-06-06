@@ -2,7 +2,9 @@
 name: First Workflow
 #Trigger the workflow to run manually from github
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    issues:
+    types: [opened]
 
 # To the workflow add a first job called job1 with two steps within it
 jobs:
