@@ -9,6 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Azure logon
         uses: azure/login@v2
         with:
@@ -19,5 +21,5 @@ jobs:
         with:
           subscriptionId: ${{ vars.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ vars.AZURE_RESOURCE_GROUP }}
-          template: ../InfrastructureAsCode/main.bicep
+          template: ./InfrastructureAsCode/main.bicep
           parameters: environment=dev
