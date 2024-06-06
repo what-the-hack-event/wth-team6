@@ -3,8 +3,16 @@ name: Deploy Workflow
 #Trigger the workflow to run manually from github
 on:
   workflow_dispatch:
- 
-
+    inputs:
+      environment:
+        type: choice
+        options:
+          - dev
+          - test
+          - prod
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -22,4 +30,4 @@ jobs:
           subscriptionId: ${{ vars.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ vars.AZURE_RESOURCE_GROUP }}
           template: ./InfrastructureAsCode/main.bicep
-          parameters: environment=dev
+          parameters: environment=${{ github.event.inputs.environment}}
