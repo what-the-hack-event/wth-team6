@@ -4,7 +4,7 @@
 name: .NET
 
 env:
-  registryName: ${{ secrets.ACR_REGISTRY_NAME }}
+  registryName: neoftczzh6nnkwthreg.azurecr.io
   repositoryName: wth/dotnetcoreapp
   tag: ${{  github.run_number }}
   dockerFolderPath: './Application/src/RazorPagesTestSample'
@@ -43,6 +43,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: docker login
-      run: docker login ${{ secrets.ACR_LOGIN_SERVER }} -u ${{ secrets.ACR_USERNAME }} -p ${{ secrets.ACR_PASSWORD }}
+      run: docker login $registryName -u ${{ secrets.ACR_USERNAME }} -p ${{ secrets.ACR_PASSWORD }}
     - name: Build Docker image
       run: docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerFolderPath
