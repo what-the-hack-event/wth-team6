@@ -1,0 +1,15 @@
+# create a github workflow file in the .github/workflows directory
+name: First Workflow
+#Trigger the workflow to run manually from github
+on:
+  workflow_dispatch
+
+# To the workflow add a first job called job1 with two steps within it
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1
+        run: echo "This is step 1"
+      - name: Step 2
+        run: echo "This is step 2"
