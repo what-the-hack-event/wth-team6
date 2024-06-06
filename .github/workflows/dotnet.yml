@@ -46,3 +46,5 @@ jobs:
       run: docker login $registryName -u ${{ secrets.ACR_USERNAME }} -p ${{ secrets.ACR_PASSWORD }}
     - name: Build Docker image
       run: docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerFolderPath
+    - name: Push Docker image
+      run: docker push $registryName/$repositoryName:$tag
