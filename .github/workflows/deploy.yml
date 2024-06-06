@@ -1,0 +1,22 @@
+# create a github workflow file in the .github/workflows directory
+name: Deploy Workflow
+#Trigger the workflow to run manually from github
+on:
+  workflow_dispatch:
+ 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Azure logon
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+       #Use the “Deploy Azure Resource Manager (ARM) Template” action to call the Bicep template in your repository 
+      - name: Deploy ARM Template
+        uses: Azure/arm-deploy@v1
+        with:
+          resourceGroupName: ${{ vars.AZURE_RESOURCE_GROUP }}
+          template: ./InfrastructureAsCode/main.bicep
+          parameters: environment=dev
